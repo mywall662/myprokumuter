@@ -56,15 +56,6 @@ header {
     transition: background-color 0.3s ease;
   }
 
-  img {
-    background-color: white;
-    border-radius: 20px;
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-bottom: 1px solid #ccc;
-  }
-
   .station-name {
     padding: 10px;
     text-align: center;
@@ -77,6 +68,17 @@ header {
     box-sizing: border-box; /* Ensures padding and border are included in width */
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  @media (max-width: 768px) {
+    .station-item {
+      width: calc(50% - 30px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .station-item {
+      width: 100%;
+    }
   }
 	</style>
 </head>
