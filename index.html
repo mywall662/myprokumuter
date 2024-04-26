@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>KTMB TimeTable</title>
-	<style >
-			body {
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTMB TimeTable</title>
+
+<style>
+         body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
@@ -18,31 +19,57 @@ header {
     padding: 1px;
     text-align: center;
 }
- .container {
-     max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 100px;
-  }
 
-  .station-list {
+.station-filter h1 {
+    font-size: 20px;
+}
+
+.station-filter h2 {
+    font-size: 15px;
+}
+
+.station-filter {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    padding: 20px;
+    float: left;
+    margin-top: 35px;
+    margin-right: 10px;
+}
+
+.station-filter input,
+.station-filter label {
+    margin-top: 10px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.station-list {
     display: flex;
     flex-wrap: wrap;
     padding: 0;
     list-style-type: none;
-  }
+    margin: 0;
+}
 
-  .station-item {
+.station-item {
     width: calc(25% - 30px);
     margin-right: 20px;
     margin-bottom: 20px;
     text-align: left;
-  }
+}
 
-  .station-item:hover {
+.station-item:hover {
     transform: scale(1.05);
-  }
+}
 
-  .btn {
+.btn {
     display: block;
     width: 100%;
     cursor: pointer;
@@ -50,393 +77,466 @@ header {
     padding: 15px 0;
     text-decoration: none;
     background-color: #dbd7d7;
-    color: #black;
+    color: #000;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
-  }
+}
 
-  .station-name {
+.station-name {
     padding: 10px;
     text-align: center;
-  }
-  #searchInput {
-    position: absolute;
+}
+
+.search-station {
+    margin-bottom: 20px;
+}
+
+#searchInput {
     top: 120px;
     width: 270px;
     padding: 15px;
-    box-sizing: border-box; /* Ensures padding and border are included in width */
+    box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 5px;
-  }
-  @media (max-width: 768px) {
-    .station-item {
-      width: calc(50% - 30px);
-    }
-  }
+}
 
-  @media (max-width: 480px) {
-    .station-item {
-      width: 100%;
+/* Mobile Compatibility */
+
+@media (max-width: 768px) {
+    .station-filter {
+        width: 90%;
+        max-width: 100%; /* Adjusted for mobile */
+        float: none; /* Centering for mobile */
+        margin: 0 auto; /* Centering horizontally */
     }
-  }
-	</style>
+
+    .station-item {
+        width: calc(50% - 20px); /* Adjusted for mobile */
+        margin-right: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .station-item:last-child {
+        margin-right: 0; /* Remove right margin for last item in row */
+    }
+
+    #searchInput {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 10px; /* Added margin for spacing */
+    }
+}
+
+  </style>
 </head>
 <body>
-	<header> <h1> KTMB TIMETABLE</h1></header>
+  <header> <h1> KTMB TIMETABLE</h1></header>
+ <div class="station-filter">
+    <h1>SEARCH FILTER</h1>
+    <h2>REGION</h2>
+    
+    <input type="checkbox" id="tickButton1" onchange="filterStations()">
+    <label for="KVDT">KVDT</label><br>
+    <input type="checkbox" id="tickButton2" onchange="filterStations()">
+    <label for="RIDT">RIDT</label><br>
+    <input type="checkbox" id="tickButton3" onchange="filterStations()">
+    <label for="SBC">SBC</label><br>
+    <input type="checkbox" id="tickButton4" onchange="filterStations()">
+    <label for="SGEDT">SGEDT</label><br>
+
+    <h1>ROAD MAP</h1>
+    <img src="https://raw.githubusercontent.com/mywall662/myprokumuter/main/roadmap.png.jpg" alt="Station Image">
+  </div>
+
 
 <div class="container">
-	<div class="search-station">
+  <div class="search-station">
 
-	<input type="text" id="searchInput" placeholder="Search by station name">
+  <input type="text" id="searchInput" placeholder="Search by station name">
 </div>
-<ul class="station-list" id="list" >
-  <li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52800'">
+    <ul class="station-list" id="list">
+       <li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52800'">
     <div class="station-name">ANGKASAPURI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19600'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19600'">
     <div class="station-name">BANDAR TASEK SELATAN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20900'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20900'">
     <div class="station-name">BANGI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18900'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18900'">
     <div class="station-name">BANK NEGARA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=21300'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=21300'">
     <div class="station-name">BATANG BENAR</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53800'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53800'">
     <div class="station-name">BATU TIGA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54500'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54500'">
     <div class="station-name">BUKIT BADAK</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53100'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53100'">
     <div class="station-name">JALAN TEMPLER</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19100'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19100'">
     <div class="station-name">KL SENTRAL</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19000'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19000'">
     <div class="station-name">KUALA LUMPUR</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53400'">
     <div class="station-name">KG DATO HARUN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55000'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55000'">
     <div class="station-name">KG RAJA UDA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22000'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22000'">
     <div class="station-name">LABU</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20400'">
     <div class="station-name">KAJANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19205'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19205'">
     <div class="station-name">MID VALLEY</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19300'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19300'">
     <div class="station-name">SEPUTEH</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55200'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55200'">
     <div class="station-name">PELABUHAN KLANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54700'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54700'">
     <div class="station-name">KLANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55100'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=55100'">
     <div class="station-name">JALAN KASTAM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=21500'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=21500'">
     <div class="station-name">NILAI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52900'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52900'">
     <div class="station-name">PANTAI DALAM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53000'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53000'">
     <div class="station-name">PETALING</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18800'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18800'">
     <div class="station-name">PUTRA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18100'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18100'">
     <div class="station-name">KUANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18700'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18700'">
     <div class="station-name">SEGAMBUT</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54400'">
     <div class="station-name">PADANG JAWA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53500'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53500'">
     <div class="station-name">SRI SETIA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54900'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54900'">
     <div class="station-name">TELUK GADONG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54800'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54800'">
     <div class="station-name">TELUK PULAI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22700'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22700'">
     <div class="station-name">SEREMBAN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22400'">
     <div class="station-name">TIROI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=17800'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=17800'">
     <div class="station-name">RAWANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19900'">
+<li class="station-item KVDT"> 
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19900'">
     <div class="station-name">SERDANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18500'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18500'">
     <div class="station-name">SUNGAI BULOH</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20500'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=20500'">
     <div class="station-name">UKM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54200'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=54200'">
     <div class="station-name">SHAH ALAM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53700'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53700'">
     <div class="station-name">SUBANG JAYA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18400'">
     <div class="station-name">KEPONG SENTRAL</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18600'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=18600'">
     <div class="station-name">KEPONG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19400'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=19400'">
     <div class="station-name">SALAK SELATAN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53600'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=53600'">
     <div class="station-name">SETIA JAYA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=57700'">
-    <div class="station-name">SKYPARK</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52700'">
+<li class="station-item KVDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=52700'">
     <div class="station-name">ABDULLAH HUKUM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50000'">
+ <li class="station-item SBC">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50000'">
     <div class="station-name">SENTUL</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50505'">
+<li class="station-item SBC">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50505'">
     <div class="station-name">BATU KENTOMEN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50400'">
+<li class="station-item SBC">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50400'">
     <div class="station-name">KAMPUNG BATU</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50500'">
+<li class="station-item SBC">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50500'">
     <div class="station-name">TAMAN WAHYU</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50600'">
+<li class="station-item SBC">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=50600'">
     <div class="station-name">BATU CAVE</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22900'">
+
+<li class="station-item SGEDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=22900'">
     <div class="station-name">SENAWANG</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=23100'">
+<li class="station-item SGEDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=23100'">
     <div class="station-name">SUNGAI GADUT</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=23900'">
-    <div class="station-name">REMBAU</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=25100'">
+<li class="station-item SGEDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=25100'">
     <div class="station-name">TAMPIN</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=26400'">
+<li class="station-item SGEDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=26400'">
     <div class="station-name">BATANG MELAKA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=27800'">
+<li class="station-item SGEDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=27800'">
     <div class="station-name">GEMAS</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=17300'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=17300'">
     <div class="station-name">SERENDAH</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16500'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16500'">
     <div class="station-name">BATANG KALI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16300'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16300'">
     <div class="station-name">RASA</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16100'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=16100'">
     <div class="station-name">KUALA KUBU BARU</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=15400'">
-    <div class="station-name">KALUMPANG</div>
-    </div>
-</li>
-  <li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=15200'">
+  <li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=15200'">
     <div class="station-name">TANJUNG MALIM</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=14600'">
-    <div class="station-name">BEHRANG</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=14100'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=14100'">
     <div class="station-name">SLIM RIVER</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=12900'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=12900'">
     <div class="station-name">SUNGKAI</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=11600'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=11600'">
     <div class="station-name">TAPAH ROAD</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=10900'">
+<li class="station-item RIDT">
+    <div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=10900'">
     <div class="station-name">KAMPAR</div>
     </div>
 </li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=10200'">
-    <div class="station-name">KOTA BAHRU</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=09700'">
-    <div class="station-name">BATU GAJAH</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=09400'">
-    <div class="station-name">LAHAD</div>
-    </div>
-</li>
-<li class="station-item">
-  	<div class="btn" onclick="window.location.href='https://myrailtime.ktmb.com.my/timetable?origin=09000'">
-    <div class="station-name">IPOH</div>
-    </div>
-</li>
-</ul>
+    </ul>
+</div>
+
+<script>
+    function filterStations() {
+        var kvdtCheckbox = document.getElementById("tickButton1");
+        var ridtCheckbox = document.getElementById("tickButton2");
+        var sbcCheckbox = document.getElementById("tickButton3");
+        var sgedtCheckbox = document.getElementById("tickButton4");
+
+        var kvdtStations = document.querySelectorAll(".KVDT");
+        var ridtStations = document.querySelectorAll(".RIDT");
+        var sbcStations = document.querySelectorAll(".SBC");
+        var sgedtStation = document.querySelectorAll(".SGEDT");
+
+        if (kvdtCheckbox.checked) {
+            kvdtStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+        } else {
+            kvdtStations.forEach(function(station) {
+                station.style.display = "none";
+            });
+        }
+
+        if (ridtCheckbox.checked) {
+            ridtStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+        } else {
+            ridtStations.forEach(function(station) {
+                station.style.display = "none";
+            });
+        }
+
+        if (sbcCheckbox.checked) {
+            sbcStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+        } else {
+            sbcStations.forEach(function(station) {
+                station.style.display = "none";
+            });
+        }
+         if (sgedtCheckbox.checked) {
+            sgedtStation.forEach(function(station) {
+                station.style.display = "block";
+            });
+        } else {
+            sgedtStation.forEach(function(station) {
+                station.style.display = "none";
+            });
+        }
+
+        // If all checkboxes are unchecked, show all stations
+        if (!kvdtCheckbox.checked && !ridtCheckbox.checked && !sbcCheckbox.checked && !sgedtCheckbox.checked) {
+            kvdtStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+            ridtStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+            sbcStations.forEach(function(station) {
+                station.style.display = "block";
+            });
+            sgedtStation.forEach(function(station) {
+                station.style.display = "block";
+            });
+        }
+    }
+</script>
 
 <script>
   // Function to filter list items based on user input
